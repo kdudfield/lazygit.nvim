@@ -41,7 +41,7 @@ local function exec_lazygit_command(cmd)
   if LAZYGIT_LOADED == false then
     -- ensure that the buffer is closed on exit
     vim.g.lazygit_opened = 1
-    vim.fn.termopen(cmd, { on_exit = on_exit })
+    vim.fn.termopen(cmd, { on_exit = on_exit, env = { "XDG_CONFIG_HOME", vim.env.XDG_CONFIG_HOME } })
   end
   vim.cmd("startinsert")
 end
