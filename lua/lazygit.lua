@@ -117,7 +117,13 @@ local function lazygitfilter(path)
   end
   prev_win = vim.api.nvim_get_current_win()
   open_floating_window()
-  local cmd = "lazygit " .. "-f " .. path
+
+  local cmd = "lazygit"
+  if vim.g.lazygit_use_custom_config_file_path == 1 then
+    cmd = cmd .. " -ucf " .. lazygitgetconfigpath()
+  end
+  cmd = cmd ..  " -f " .. path
+
   exec_lazygit_command(cmd)
 end
 
